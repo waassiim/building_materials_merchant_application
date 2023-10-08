@@ -3,14 +3,17 @@ import mysql.connector
 from mysql.connector import Error
 from tkinter import *
 from tkinter import ttk
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication,QMainWindow
+import sys
 listt = []
 # connecting data base
 try:
     connection = mysql.connector.connect(host='127.0.0.1',
                                          port='3306',
-                                         database='app',
+                                         database='application',
                                          user='root',
-                                         password="Ya3an3anter@50858938" ,
+                                         password="your_database_password" ,
                                          auth_plugin='mysql_native_password')
     if connection.is_connected():
         db_Info = connection.get_server_info()
@@ -19,7 +22,7 @@ try:
         cursor.execute("select database();")
         record = cursor.fetchone()
         print("You're connected to database: ", record)
-        cursor.execute("SELECT * FROM app.items")
+        cursor.execute("SELECT * FROM application.items")
         for x in cursor:
             listt.append(x)
         print(listt)
@@ -33,7 +36,7 @@ except Error as e:
 # creating class  items that can modifie and add to it like u want
 class Items:
     def __init__(self):
-        self.prix = {}
+        self.item = {}
 
 # creating client class that have a list of bills that each one have a date deferint from other
 class client:
